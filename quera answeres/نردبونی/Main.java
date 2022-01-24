@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class App {
+public class java {
     public static void Function(int first, int second) {
-        if (first%second==0) {
-            System.out.println(Math.abs(second));
+        if (second==0) {
+            System.out.println(Math.abs(first));
             return;
         }
         else{
