@@ -15,7 +15,7 @@ public class Main {
         }
 
         for (int i = 0; i < stairNumbers-1; i++) {
-            if (stairsHight[i] >= stairsHight[i+1]) {
+            if (stairsHight[i] > stairsHight[i+1]) {
                 up=true;
                 if (down == true) {
                     counter++;
