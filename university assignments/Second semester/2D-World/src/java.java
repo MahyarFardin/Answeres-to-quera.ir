@@ -20,7 +20,11 @@ public class java {
         Line line=new Line(point1, point2);
         Circle circle = new Circle(point, line);
         circle.Show();
-
+        circle.Move(5, 5);
+        circle.Resize(new Point(10,10));
+        circle.Area();
+        circle.Perimeter();
+        circle.Help();
     }
 }
 
