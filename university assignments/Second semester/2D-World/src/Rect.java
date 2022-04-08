@@ -1,19 +1,18 @@
-import java.util.Scanner;
-
-import javax.swing.SpinnerDateModel;
-
-public class Rect {
+public class Rect extends Size implements Shape2d, Drawable  {
+    
     private Point m_center;
     private Size m_size;
     private double m_angle;
 
-    Rect(Point point,Size size, double angle){
+    Rect(Point point,Size size, double angle, int width, int height){
+        super(width, height);
         m_center= point;
         m_size=size;
         m_angle=angle;
     }
 
-    Rect(Size size, double angle){
+    Rect(Size size, double angle, int width, int height){
+        super(width, height);
         m_center= new Point();
         m_size=size;
         m_angle=angle;
@@ -38,14 +37,21 @@ public class Rect {
         this.m_size = m_size;
     }
     public void Show(){
-        System.out.println("Center is :"+ m_center);
+        System.out.print("Center is :");
+        m_center.Show();
         System.out.println("Angel is :"+ m_angle);
         System.out.println("Sizes are:");
-        m_size.Show();
+        m_size.Show_size();
     }
 
-    public void Move(double x, double y){
-        m_center.Move(x, y);
+    @Override
+    public  void setM_width(double width){
+        this.m_width = width+5;
+    }
+
+    @Override
+    public void Move(Point point){
+        m_center.Move(point.getM_x(), point.getM_y());
         System.out.println("Center is: ");
         m_center.Show();
     }
@@ -59,6 +65,7 @@ public class Rect {
         setM_angle(angle);
     }
 
+    @Override
     public void Area(){
         System.out.println("Area is: "+m_size.getM_height()*m_size.getM_width());
     }
@@ -76,5 +83,37 @@ public class Rect {
         System.out.println("4.Resize");
         System.out.println("5.Move");
         System.out.println("6.ReAngle");
+    }
+
+    @Override
+    public Point[] getPoints() {
+        Point [] endPoints=new Point[4];
+        
+        double [] points= new double[4];
+        points[0]=getM_center().getM_x()-(this.getM_width()/2);
+        points[1]=getM_center().getM_x()+(this.getM_width()/2);
+        points[2]=getM_center().getM_y()-(this.getM_width()/2);
+        points[3]=getM_center().getM_y()-(this.getM_width()/2);
+        
+        for (int i = 0; i < 2; i++) {
+            for (int j = 2; j < 4; j++) {
+                endPoints[1]=new Point(points[i], points[j]);
+            }
+        }
+        
+
+        System.out.println("These are points from top left to bottom right");
+        for (Point p : endPoints) {
+            p.Show();
+        }
+
+        return endPoints;
+    }
+
+    @Override
+    public Rect boundingBox() {
+        Point [] endPoints=new Point[4];
+        endPoints=this.getPoints();
+        return null;
     }
 }

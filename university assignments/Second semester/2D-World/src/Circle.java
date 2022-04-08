@@ -1,4 +1,4 @@
-public class Circle {
+public class Circle extends Point implements Shape2d, Drawable{
 
     private Point m_center;
     private Line m_radios;
@@ -41,13 +41,15 @@ public class Circle {
         m_radios.length();
     }
 
-    public void Move(double deltax, double deltay) {
-        m_center.Move(deltax, deltay);
+    @Override
+    public void Move(Point point) {
+        m_center.Move(point.getM_x(), point.getM_y());
         System.out.println("Center & radious start moved to: ");
         m_center.Show();
         m_radios.set_start(m_center);
     }
 
+    @Override
     public void Area(){
         System.out.println("Area is: "+ 3.14*Math.pow(m_radios.line_Leght(),2));
     }
@@ -71,5 +73,4 @@ public class Circle {
         System.out.println("5.Area");
         System.out.println("6.Perimeter");
     }
-
 }

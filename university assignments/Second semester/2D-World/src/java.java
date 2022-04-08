@@ -12,19 +12,9 @@ public class java {
 
         */
 
-
-        Point point=new Point(scan.nextDouble(), scan.nextDouble());
-        Point point1=new Point(scan.nextDouble(), scan.nextDouble());
-        Point point2=new Point(scan.nextDouble(), scan.nextDouble());
-
-        Line line=new Line(point1, point2);
-        Circle circle = new Circle(point, line);
-        circle.Show();
-        circle.Move(5, 5);
-        circle.Resize(new Point(10,10));
-        circle.Area();
-        circle.Perimeter();
-        circle.Help();
+        Rect rect= new Rect(new Point(1,1), new Size(2,3), 0,2,10);
+        rect.setM_width(5);
+        rect.Show();
     }
 }
 
