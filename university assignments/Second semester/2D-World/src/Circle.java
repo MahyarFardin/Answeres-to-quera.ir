@@ -73,4 +73,32 @@ public class Circle extends Point implements Shape2d, Drawable{
         System.out.println("5.Area");
         System.out.println("6.Perimeter");
     }
+    @Override
+    public Point[] getPoints() {
+        System.out.print("All the points with "+this.m_radios+" distance from point ");
+        this.m_center.Show();
+        return null;
+    }
+    
+    @Override
+    public double tangantCalculator(Line distance, double angel) {
+        // no need to impliment
+        return 0;
+    }
+    
+    @Override
+    public Point[] boundingBox() {
+        Point [] endPoints=new Point[4];
+
+        int counter=0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                counter++;
+                endPoints[counter]=new Point(i%2==0 ? this.m_center.getM_x()+this.m_radios.length():this.m_center.getM_x()-this.m_radios.length(),
+                j%2==0 ? this.m_center.getM_y()+this.m_radios.length():this.m_center.getM_y()-this.m_radios.length());
+            }
+        }
+
+        return endPoints;
+    }
 }

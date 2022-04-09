@@ -122,14 +122,51 @@ public class Line implements Drawable{
 
     @Override
     public Point[] getPoints() {
-        // TODO Auto-generated method stub
-        return null;
+        Point[] point = new Point[2];
+        point[0]=this.m_start;
+        point[1]=this.m_end;
+        return point;
     }
 
+    @Override
+    public double tangantCalculator(Line distance, double angel) {
+        return this.Slop();
+    }
 
     @Override
-    public Rect boundingBox() {
-        // TODO Auto-generated method stub
-        return null;
+    public Point[] boundingBox() {
+        Point [] endPoints=new Point[4];
+        endPoints=this.getPoints();
+
+        double [] borders= new double[4]; //maximums and minimums ind x-y axis
+
+        borders[0]=borders[1]=Double.MIN_VALUE;
+        borders[3]=borders[2]=Double.MAX_VALUE;
+
+        for(Point p : endPoints){
+            if (p.getM_x() > borders[0]) {
+                borders[0]=p.getM_x();
+            }
+            else if(p.getM_x() < borders[2]){
+                borders[2]=p.getM_x();
+            }
+
+            if (p.getM_y() > borders[1]) {
+                borders[1]=p.getM_y();
+            }
+            else if(p.getM_y() < borders[3]){
+                borders[3]=p.getM_y();
+            }
+        }
+
+        int counter=0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                counter++;
+                endPoints[counter]=new Point(borders[i]+borders[0], borders[j]+borders[1]);
+            }
+        }
+
+        return endPoints;
     }
 }

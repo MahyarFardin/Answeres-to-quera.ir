@@ -98,7 +98,7 @@ public class Rect extends Size implements Shape2d, Drawable  {
         points[3]=getM_center().getM_y()-(this.getM_width()/2);
         
         delt[0]=tangantCalculator(new Line(this.m_center, new Point(this.m_center.getM_x(), points[0])), this.m_angle);
-        delt[1]=tangantCalculator(new Line(this.m_center, new Point(this.m_center.getM_x(), points[2])), this.m_angle);
+        delt[1]=tangantCalculator(new Line(this.m_center, new Point(this.m_center.getM_y(), points[2])), this.m_angle);
 
         int counter=0;
         for (int i = 0; i < 2; i++) {
@@ -107,9 +107,7 @@ public class Rect extends Size implements Shape2d, Drawable  {
                 endPoints[counter]=new Point(points[i]+delt[0], points[j]+delt[1]);
             }
         }
-        
-
-        
+               
         System.out.println("These are points from top left to bottom right");
         for (Point p : endPoints) {
             p.Show();
@@ -119,10 +117,40 @@ public class Rect extends Size implements Shape2d, Drawable  {
     }
 
     @Override
-    public Rect boundingBox() {
+    public Point[] boundingBox() {
         Point [] endPoints=new Point[4];
         endPoints=this.getPoints();
-        return null;
+
+        double [] borders= new double[4]; //maximums and minimums ind x-y axis
+
+        borders[0]=borders[1]=Double.MIN_VALUE;
+        borders[3]=borders[2]=Double.MAX_VALUE;
+
+        for(Point p : endPoints){
+            if (p.getM_x() > borders[0]) {
+                borders[0]=p.getM_x();
+            }
+            else if(p.getM_x() < borders[2]){
+                borders[2]=p.getM_x();
+            }
+
+            if (p.getM_y() > borders[1]) {
+                borders[1]=p.getM_y();
+            }
+            else if(p.getM_y() < borders[3]){
+                borders[3]=p.getM_y();
+            }
+        }
+
+        int counter=0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                counter++;
+                endPoints[counter]=new Point(borders[i]+borders[0], borders[j]+borders[1]);
+            }
+        }
+
+        return endPoints;
     }
 
     @Override
