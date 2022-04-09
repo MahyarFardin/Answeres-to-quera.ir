@@ -87,6 +87,8 @@ public class Rect extends Size implements Shape2d, Drawable  {
 
     @Override
     public Point[] getPoints() {
+        double [] delt=new double[2];
+
         Point [] endPoints=new Point[4];
         
         double [] points= new double[4];
@@ -95,13 +97,19 @@ public class Rect extends Size implements Shape2d, Drawable  {
         points[2]=getM_center().getM_y()-(this.getM_width()/2);
         points[3]=getM_center().getM_y()-(this.getM_width()/2);
         
+        delt[0]=tangantCalculator(new Line(this.m_center, new Point(this.m_center.getM_x(), points[0])), this.m_angle);
+        delt[1]=tangantCalculator(new Line(this.m_center, new Point(this.m_center.getM_x(), points[2])), this.m_angle);
+
+        int counter=0;
         for (int i = 0; i < 2; i++) {
-            for (int j = 2; j < 4; j++) {
-                endPoints[1]=new Point(points[i], points[j]);
+            for (int j = 0; j < 2; j++) {
+                counter++;
+                endPoints[counter]=new Point(points[i]+delt[0], points[j]+delt[1]);
             }
         }
         
 
+        
         System.out.println("These are points from top left to bottom right");
         for (Point p : endPoints) {
             p.Show();
@@ -115,5 +123,10 @@ public class Rect extends Size implements Shape2d, Drawable  {
         Point [] endPoints=new Point[4];
         endPoints=this.getPoints();
         return null;
+    }
+
+    @Override
+    public double tangantCalculator(Line distance, double angel) {
+        return (distance.length()*Math.tan(angel));
     }
 }

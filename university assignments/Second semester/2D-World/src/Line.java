@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Line {
+public class Line implements Drawable{
 
     private Point m_start;
     private Point m_end;
@@ -110,10 +110,26 @@ public class Line {
         Show();
     }
 
-    public void length(){
-        System.out.println(Math.sqrt(Math.pow(m_start.getM_x()-m_end.getM_x(),2)+Math.pow(m_start.getM_y()-m_end.getM_y(),2)));
+    public double length(){
+        double len=Math.sqrt(Math.pow(m_start.getM_x()-m_end.getM_x(),2)+Math.pow(m_start.getM_y()-m_end.getM_y(),2));
+        System.out.println(len);
+        return len;
     }
     public double line_Leght(){
         return (Math.sqrt(Math.pow(m_start.getM_x()-m_end.getM_x(),2)+Math.pow(m_start.getM_y()-m_end.getM_y(),2)));
+    }
+
+
+    @Override
+    public Point[] getPoints() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public Rect boundingBox() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
