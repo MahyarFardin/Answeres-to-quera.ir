@@ -20,7 +20,9 @@ public class App {
 
         for (String subDir : components) {
             File temp = new File(dir + "/" + subDir);
+            
             if (temp.isFile()) {
+                System.out.println(temp.getPath());
                 Finder finder = new Finder(temp.getPath(), word);
                 results.add(finder);
 
@@ -30,20 +32,20 @@ public class App {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         ArrayList<Finder> results = new ArrayList<Finder>();
         int counter = 0;
-        
+
         System.out.println("Enter your start directory");
         String startDirectory = cin.next();
-        
+
         System.out.println("===========================");
-        
+
         System.out.println("Enter your word");
         String word = cin.next();
-        
+
         cin.close();
 
         FileFinder(startDirectory, word, results);
@@ -55,7 +57,9 @@ public class App {
                 } catch (InterruptedException e) {
                 }
             }
-            counter = thread.getResult() == true ? counter++ : counter;
+            if(thread.getResult()==true){
+                counter++;
+            }
         }
 
         System.out.println(counter);

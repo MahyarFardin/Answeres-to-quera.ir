@@ -1,41 +1,35 @@
 package com.tabrizu;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Finder extends Thread {
-    private FileReader file;
-    private BufferedReader bufferedReader = new BufferedReader(file);
+    private Scanner file;
     private String word;
     private boolean result;
 
-    public Finder(String filename, String word) {
+    public Finder(String fileName, String word) {
+        File file=new File(fileName);
         try {
-            this.file = new FileReader(filename);
-            this.word = word;
+            this.file = new Scanner(file);
         } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        this.word = word;
     }
 
     @Override
     public void run() {
-        String line;
-        String[] words;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                words = line.split(" ");
-                int counter = words.length;
-                while (counter > -1) {
-                    if (this.word == words[counter]) {
-                        result = true;
-                        return;
-                    }
-                    counter--;
+        while (file.hasNextLine()) {
+            String[] words = file.nextLine().split(" ");
+            for (String string : words) {
+                if (string.equals(word)) {
+                    this.result = true;
+                    return;
                 }
             }
-        } catch (IOException e) {
         }
     }
 
