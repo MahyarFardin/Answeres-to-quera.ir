@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -7,19 +6,19 @@ public class App {
         int n = scan.nextInt();
         scan.close();
 
-        int[] A = new int[n + 1];
-        int[] B = new int[n + 1];
+        int[] a = new int[n + 1];
+        int[] b = new int[n + 1];
 
-        A[0] = 1;
-        A[1] = 0;
-        B[0] = 0;
-        B[1] = 1;
+        a[0] = 1;
+        a[1] = 0;
+        b[0] = 0;
+        b[1] = 1;
 
         for (int i = 2; i <= n; i++) {
-            A[i]=A[i - 2] + 2 * B[i - 1];
-            B[i]=A[i - 1] + B[i - 2];
+            a[i]=a[i - 2] + 2 * b[i - 1];
+            b[i]=a[i - 1] + b[i - 2];
         }
 
-        System.out.println(A[n]*2);
+        System.out.println(a[n]*2);
     }
 }
